@@ -37,7 +37,6 @@ var ParameterCodec = runtime.NewParameterCodec(ParameterScheme)
 func init() {
 	ParameterScheme.AddUnversionedTypes(metav1.SchemeGroupVersion,
 		&metav1.ListOptions{},
-		&metav1.ExportOptions{},
 		&metav1.GetOptions{},
 		&metav1.DeleteOptions{},
 		&metav1.CreateOptions{},

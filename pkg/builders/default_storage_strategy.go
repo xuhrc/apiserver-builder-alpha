@@ -45,6 +45,14 @@ type DefaultStorageStrategy struct {
 	names.NameGenerator
 }
 
+func (b DefaultStorageStrategy) WarningsOnUpdate(ctx context.Context, obj, old runtime.Object) []string {
+	panic("implement me")
+}
+
+func (b DefaultStorageStrategy) WarningsOnCreate(ctx context.Context, obj runtime.Object) []string {
+	panic("implement me")
+}
+
 func (DefaultStorageStrategy) ObjectNameFunc(obj runtime.Object) (string, error) {
 	switch obj := obj.(type) {
 	default:
@@ -61,8 +69,6 @@ func (DefaultStorageStrategy) ObjectNameFunc(obj runtime.Object) (string, error)
 func (DefaultStorageStrategy) Build(builder StorageBuilder, store *StorageWrapper, options *generic.StoreOptions) {
 	store.PredicateFunc = builder.BasicMatch
 	store.ObjectNameFunc = builder.ObjectNameFunc
-	store.CreateStrategy = builder
-	store.UpdateStrategy = builder
 	store.DeleteStrategy = builder
 
 	options.AttrFunc = builder.GetAttrs
